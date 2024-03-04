@@ -1,0 +1,151 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: .75fr 3fr;
+  grid-gap: 16px;
+  grid-template-areas:
+    "one two"
+    "one two"
+    "one three";
+  grid-template-rows: 500px;
+  
+}
+
+.filter-section {
+  grid-area: one;
+}
+
+.phish-display-section {
+  grid-area: two;
+  
+}
+
+.create-post-section {
+  grid-area: three;
+
+}
+
+#body {
+  margin: 100px 0 80px 0;
+  padding: 0 20px 0 20px;
+}
+  
+.sorting {
+  padding: .25rem;
+}
+
+#sortOrder, #searchInput {
+  padding: 4px 10px;
+  border: 2px solid #04AA6D;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #04AA6D; /* Green */ 
+  border: none;
+  color: white;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.smaller-button {
+  background-color: #04AA6D; /* Green */ 
+  border: none;
+  color: white;
+  padding: 4px 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.smaller-button:hover {
+  background-color: grey;
+}
+
+.btn-primary:hover {
+  background-color: grey;
+}
+
+nav.navbar {
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+}
+
+#identity_div {
+  padding: 0 20px 0 20px;
+}
+
+h1{
+  margin-top: 20px;
+}
+
+a {
+  color: whitesmoke;
+}
+
+.profileLink {
+  color:#04AA6D;
+}
+
+.username {
+  font-size: 1rem;
+  color: white;
+}
+
+.comment-username {
+  color: #04AA6D;
+}
+
+.post{
+  border: solid .5px;
+  margin-top: 1rem;
+}
+
+.postHeader {
+  display: inline;
+}
+
+.new-comment-box {
+  padding: .5rem;
+}
+
+.username {
+  background-color: #04AA6D;
+}
+
+.return-to-homepage {
+  color:#04AA6D;
+}
+/* h3 {
+  margin-top: 3rem;
+} */
+
+.postHeader p {
+    margin-right: 10px; /* Adjust margin as needed */
+  }
+
+.heart_button{
+  color:red;
+}
+
+.comments-box{
+  border: 1px black solid;
+  margin: 10px;
+}
+
+.individual-comment-box{
+  border: 1px black solid;
+  margin: 3px;
+}
+

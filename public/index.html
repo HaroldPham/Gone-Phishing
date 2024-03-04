@@ -1,0 +1,133 @@
+<html>
+
+<head>
+  <title>Gone Phishing</title>
+  <!-- Icon is from flaticon.com -->
+  <link rel="icon" type="image/png" href="./images/icon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="javascripts/utils.js"></script>
+  <script src="javascripts/identity.js"></script>
+  <script src="javascripts/index.js"></script>
+</head>
+
+<body onload="init()">
+  <nav class="navbar navbar-light bg-light">
+    <div id="errorInfo" class="alert alert-danger fade show" role="alert" style="opacity:0"></div>
+    <div id="identity_div">loading...</div>
+  </nav>
+  <div id="body" class="row">
+    <h1>Gone Phishing</h1> 
+    <div class="grid">
+        <!-- Left Column: Filter Section -->
+        <div class="filter-section">
+          <h2>Filter Posts</h2>
+          <select id="filter_scam_type" class="form-select filter">
+              <option value="">Select Scam Type</option>
+          </select>
+
+          <select id="filter_org" class="form-select filter">
+              <option value="">Select Organization</option>
+          </select>
+
+          <select id="filter_frequency" class="form-select filter">
+            <option value="">Select Frequency</option>
+          </select>
+          <button class="btn btn-primary" onclick="loadFilteredPosts()">Apply Filters</button>
+          <button class="btn btn-secondary" onclick="resetFilters()">Reset Filters</button>
+          <hr>
+          <div class="search-bar">
+            <h3>Search By Keyword:</h3>
+          
+              <input type="text" id="searchInput" placeholder="Search...">
+               
+            <button class="smaller-button" onclick="searchText()">Search</button>
+          </div>
+          <hr>
+          <button class="d-none smaller-button" id="goToPosts">Make a Post</button>
+        </div>
+        
+        <!-- Right Column: Phish Display and Make Post Div -->
+        <div id="phish-display-div" class="phish-display-section">
+          <h2>Phish Display:</h2>
+          <button class="btn btn-primary" onclick="loadPosts({sort: 'newest'})">refresh</button>
+          <hr>
+          <div class="sorting">
+            <select id="sortOrder" onchange="loadFilteredPosts()">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+          
+          <div id="posts_box"></div> <!--Posts will be displayed here from index.js loadPosts()-->
+          <div id='userErrorMessage'></div>
+        </div>
+
+        <div id="make_post_div" class="d-none create-post-section"> <!--The following should gather our phish post info for index.js to save to mongodb and make dom elements of-->
+          <h2>Post Your Own Phish!</h2> <!--username can be req.session.account.username-->
+          
+          <p style="font-weight: bold;">Fields marked <span style="color: red; font-weight: bold;">*</span> are required.</p>
+          
+          <p>
+            What's so interesting about this phish and why did you share it? <span style="color: red; font-weight: bold;">*</span>
+            <input type="text" id="descriptionInput" required/>
+          </p><!--description schema field-->
+          
+          <p>
+            When did you catch your phish?
+            <input type="date" id="sDateInput"/>
+          </p> <!--scam_date schema field-->
+          
+          <p>
+            Show us what the phish looks like!
+            <input type="file" id="imageUpload" name="phishImage" accept="image/*"/>
+          </p> <!--image schema field, accepts all image file types-->
+          
+          <p>
+            What kind of scam was this? <!--scam_type-->
+            <p>
+              <input type="radio" id="stText" name="sType" value="text"/>
+              <label for="stText">Text</label><br>
+              <input type="radio" id="stEmail" name="sType" value="email"/>
+              <label for="stEmail">Email</label><br>
+              <input type="radio" id="stOther" name="sType" value="other"/>
+              <label for="stOther">Other</label>
+              <br><input type="radio" id="stUnsure" name="sType" value="unsure"/>
+              <label for="stUnsure">Unsure</label>
+            </p>
+          </p>
+          
+          
+          <p>
+            If you got the scammer's email, what is it?
+            <input type="email" id="sEmail"/>
+          </p> <!--scammer_email-->
+          
+          <p>
+            If you got the scammer's phone number, what is it?
+            <input type="tel" id="sPhone" placeholder="000-000-0000" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/> <!--number pattern is 000-000-0000-->
+          </p> <!--scammer_phone-->
+          
+          <p>
+            Did the scammer try to pose as an organization? If so then which one? ("individual" if just a person)
+            <input type="text" id="org"/>
+          </p>
+          
+          <p>How often do you see this kind of scam? From 1 (least likely) to 5 (most likely)
+            <input type="number" id="sFrequency" min="1" max="5"/>
+          </p> <!--frequency-->
+          
+          <p>
+            Check the box to be an anonymous poster: <span><input type="checkbox" id="anonCheckbox"/></span>
+            <br>
+          </p> <!--If users check it to be anonymous, then "yes" will be returned, "no" otherwise.-->
+          
+          <button class="smaller-button" id="postPhish" onclick="postPhish()">Post your phish!</button> <span id="postStatus"></span> <!--Whatever was above should now be info sent to the postPhish() to process-->
+        </div>
+    </div>
+  </div> 
+</body>
+
+  
+
+</html>
